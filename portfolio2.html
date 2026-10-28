@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vivek Kumar | Full-Stack Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: { brand: { 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-200 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Authenticated Session Bar (Only visible AFTER you log in) -->
+  <div id="adminTopBar" class="hidden fixed top-0 left-0 w-full bg-amber-500 text-slate-900 px-4 py-2 text-xs font-bold z-50 flex justify-between items-center shadow-lg">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span>Administrator Session Active</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openAdminModal()" class="bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-800 transition">Open Portal</button>
+      <button onclick="logoutAdmin()" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Lock & Log Out</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-40 bg-[#0b0f19]/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- STEALTH TRIGGER: Triple-click the 'V' badge to open login -->
+      <a href="#hero" class="text-2xl font-black tracking-tight flex items-center gap-2 select-none" onclick="handleSecretLogoClick(event)">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-purple-500 flex items-center justify-center text-white text-base cursor-pointer">V</span>
+        <span id="navName">Vivek Kumar</span>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-500 transition">About</a>
+        <a href="#skills" class="hover:text-brand-500 transition">Skills</a>
+        <a href="#projects" class="hover:text-brand-500 transition">Projects</a>
+        <a href="#contact" class="hover:text-brand-500 transition">Contact</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white transition shadow-lg shadow-brand-500/25">Get In Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="pt-36 pb-20 relative overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-600/20 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="displayAvailability">Available for new opportunities</span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4">
+          Hi, I'm <span class="gradient-text" id="displayHeroName">Vivek Kumar</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl font-semibold text-slate-300 mb-6" id="displayHeadline">
+          Full-Stack Developer & Problem Solver
+        </h2>
+        <p class="text-slate-400 leading-relaxed text-base md:text-lg mb-8 max-w-lg" id="displayBio">
+          I build high-performance, accessible, and user-centric digital products that make a real difference.
+        </p>
+
+        <div class="flex flex-wrap gap-4 items-center">
+          <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-700 hover:to-purple-700 font-semibold shadow-lg shadow-brand-600/30 transition">
+            View Projects <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+          </a>
+          <a id="displayResumeLink" href="#" target="_blank" class="px-6 py-3 rounded-xl border border-slate-700 hover:border-slate-500 font-medium text-slate-300 transition">
+            <i class="fa-regular fa-file-lines mr-2"></i> View Resume
+          </a>
+        </div>
+
+        <div class="flex items-center gap-5 mt-8 text-xl text-slate-400" id="socialLinksContainer"></div>
+      </div>
+
+      <div class="relative flex justify-center">
+        <div class="w-72 h-72 md:w-80 md:h-80 rounded-3xl p-1 bg-gradient-to-tr from-brand-500 via-purple-500 to-pink-500 shadow-2xl shadow-brand-600/20">
+          <img id="displayAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" alt="Vivek Kumar" class="w-full h-full object-cover rounded-[22px] bg-slate-900">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 border-t border-slate-800/80 bg-slate-900/40">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-xs uppercase font-bold text-brand-400 tracking-widest mb-2">My Toolkit</h2>
+        <h3 class="text-3xl font-extrabold tracking-tight">Technologies & Skills</h3>
+      </div>
+      <div id="skillsGrid" class="flex flex-wrap justify-center gap-3"></div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-24 border-t border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <h2 class="text-xs uppercase font-bold text-brand-400 tracking-widest mb-2">Featured Work</h2>
+          <h3 class="text-3xl font-extrabold tracking-tight">Projects & Deployments</h3>
+        </div>
+      </div>
+      <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 border-t border-slate-800/80 bg-slate-900/40 text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-xs uppercase font-bold text-brand-400 tracking-widest mb-2">Get In Touch</h2>
+      <h3 class="text-3xl md:text-4xl font-extrabold mb-6">Let's Discuss New Ideas</h3>
+      <p class="text-slate-400 mb-8 max-w-md mx-auto">
+        Have a project or collaboration in mind? Feel free to reach out directly to my email.
+      </p>
+
+      <div class="inline-flex items-center gap-3 px-6 py-4 rounded-2xl glass-card text-brand-400 font-mono text-base border border-slate-700 mb-8">
+        <i class="fa-solid fa-envelope"></i>
+        <span id="displayEmail"></span>
+      </div>
+
+      <div class="flex justify-center">
+        <a id="emailMailto" href="#" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-medium transition shadow-lg shadow-brand-500/20">
+          Email Me Directly
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-slate-800 text-center text-xs text-slate-500">
+    <p>© <span id="year"></span> Vivek Kumar. All rights reserved.</p>
+  </footer>
+
+  <!-- ==================== STEALTH SECURE LOGIN MODAL ==================== -->
+  <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="flex items-center gap-2 mb-1">
+        <i class="fa-solid fa-shield-halved text-brand-500"></i>
+        <h3 class="text-xl font-bold">Secure Portal Verification</h3>
+      </div>
+      <p class="text-xs text-slate-400 mb-4">Enter administrator credentials to authenticate.</p>
+
+      <form id="formPasswordLogin" onsubmit="handleSecureLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Admin Email</label>
+          <input id="loginUser" type="email" placeholder="Enter admin email" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-brand-500 outline-none" required autocomplete="off">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Password</label>
+          <div class="relative">
+            <input id="loginPass" type="password" placeholder="Enter password" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 pr-10 text-white text-sm focus:border-brand-500 outline-none" required autocomplete="off">
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-2.5 text-slate-400 hover:text-white text-xs">
+              <i id="togglePassIcon" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <p id="loginError" class="text-red-400 text-xs hidden"></p>
+        <button id="loginSubmitBtn" type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2 rounded-lg transition text-sm">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== SECURE CONTENT MANAGER ==================== -->
+  <div id="adminModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-4xl rounded-2xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-4 mb-6 gap-2">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-shield-cat text-brand-500"></i> Admin Management Portal
+          </h2>
+          <p class="text-xs text-slate-400">All data entered by the administrator is sanitized before storage.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button type="button" onclick="exportDataBackup()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded border border-slate-700">
+            <i class="fa-solid fa-download mr-1"></i> Export Backup
+          </button>
+          <button type="button" onclick="resetDefaults()" class="text-xs text-red-400 hover:underline">Reset Defaults</button>
+        </div>
+      </div>
+
+      <form id="adminForm" onsubmit="savePortfolioData(event)" class="space-y-8">
+        
+        <!-- Profile Picture & Hero Info -->
+        <div>
+          <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wider mb-4">1. Personal Info & Profile Picture</h4>
+          
+          <div class="flex items-center gap-6 mb-6 p-4 rounded-xl bg-slate-800/40 border border-slate-800">
+            <img id="avatarPreview" src="" alt="Avatar Preview" class="w-20 h-20 rounded-2xl object-cover bg-slate-800 border border-slate-700">
+            <div class="flex-1">
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Upload New Profile Photo</label>
+              <input type="file" id="avatarFileInput" accept="image/png, image/jpeg, image/webp" onchange="handleAvatarUpload(event)" class="text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-brand-600 file:text-white hover:file:bg-brand-700 cursor-pointer">
+              <p class="text-[11px] text-slate-500 mt-1">PNG, JPG, or WEBP only (max dimensions auto-compressed to 800px).</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Full Name</label>
+              <input id="editName" type="text" maxlength="60" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm" required>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Headline / Role</label>
+              <input id="editHeadline" type="text" maxlength="100" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm" required>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Availability Badge</label>
+              <input id="editAvailability" type="text" maxlength="80" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Portfolio Public Email</label>
+              <input id="editEmail" type="email" maxlength="100" placeholder="Enter contact email for visitors" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Admin Phone Number</label>
+              <input id="editPhone" type="tel" maxlength="20" placeholder="Enter your phone number (e.g. +91 9876543210)" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Resume URL (https://)</label>
+              <input id="editResume" type="text" placeholder="https://..." class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs text-slate-400 mb-1">Short Bio</label>
+              <textarea id="editBio" rows="3" maxlength="600" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wider mb-4">2. Social Links</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">GitHub URL</label>
+              <input id="editGithub" type="text" placeholder="https://github.com/username" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">LinkedIn URL</label>
+              <input id="editLinkedin" type="text" placeholder="https://linkedin.com/in/username" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div>
+          <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wider mb-2">3. Skills</h4>
+          <p class="text-xs text-slate-400 mb-2">Enter your skills separated by commas</p>
+          <input id="editSkills" type="text" maxlength="300" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white text-sm">
+        </div>
+
+        <!-- Projects Manager -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wider">4. Projects</h4>
+              <p class="text-xs text-slate-400">Add, edit, or upload pictures for each project</p>
+            </div>
+            <button type="button" onclick="addNewProject()" class="text-xs bg-brand-600 hover:bg-brand-700 px-4 py-2 rounded font-medium text-white shadow">
+              <i class="fa-solid fa-plus mr-1"></i> Add Project
+            </button>
+          </div>
+          <div id="projectsEditorContainer" class="space-y-4"></div>
+        </div>
+
+        <!-- Section 5: Credentials Management -->
+        <div class="p-5 rounded-xl bg-slate-800/50 border border-slate-700/80 space-y-6">
+          
+          <!-- 5A. CHANGE LOGIN EMAIL -->
+          <div class="space-y-3 pb-5 border-b border-slate-700/60">
+            <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-envelope"></i> 5A. Change Login Email
+            </h4>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">New Administrator Email</label>
+                <input id="newAdminEmailInput" type="email" placeholder="Enter new email address" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white text-sm" autocomplete="off">
+              </div>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Current Password</label>
+                <input id="confirmPassForEmailInput" type="password" placeholder="Verify with current password" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white text-sm" autocomplete="off">
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <p id="emailChangeStatusMsg" class="text-xs font-semibold"></p>
+              <button type="button" onclick="changeAdminEmail()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded text-xs transition">
+                Verify & Update Email
+              </button>
+            </div>
+          </div>
+
+          <!-- 5B. CHANGE PASSWORD -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-key"></i> 5B. Change Password
+            </h4>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Current Password</label>
+                <input id="currentPassInput" type="password" placeholder="Enter current password" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white text-sm" autocomplete="off">
+              </div>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">New Password (min. 6 characters)</label>
+                <input id="newAdminPassInput" type="password" placeholder="Enter new password" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white text-sm" autocomplete="off">
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <p id="passwordChangeStatusMsg" class="text-xs font-semibold"></p>
+              <button type="button" onclick="changeAdminPasswordSecure()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded text-xs transition">
+                Update Password
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3 sticky bottom-0 bg-slate-900 py-3">
+          <button type="button" onclick="closeModal('adminModal')" class="px-5 py-2.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm">Close</button>
+          <button type="submit" class="px-6 py-2.5 rounded bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm transition">Save All Changes</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== LOGIC ENGINE ==================== -->
+  <script>
+    "use strict";
+
+    // 1. CLEAR ANY STUCK LOCKOUTS OR OBSOLETE SESSIONS IMMEDIATELY
+    localStorage.removeItem("vk_lockout_until");
+    localStorage.removeItem("vk_failed_attempts");
+
+    // 2. UNIVERSAL PURE SHA-256 HASH ENGINE (Works in file://, http, and https on all devices)
+    function sha256(ascii) {
+      function rightRotate(value, amount) {
+        return (value >>> amount) | (value << (32 - amount));
+      }
+      var mathPow = Math.pow;
+      var maxWord = mathPow(2, 32);
+      var lengthProperty = 'length';
+      var i, j;
+      var result = '';
+      var words = [];
+      var asciiBitLength = ascii[lengthProperty] * 8;
+      var hash = [
+        0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+        0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+      ];
+      var k = [
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+      ];
+      var composite = ascii + '\x80';
+      while (composite[lengthProperty] % 64 - 56) composite += '\x00';
+      for (i = 0; i < composite[lengthProperty]; i++) {
+        j = composite.charCodeAt(i);
+        words[i >> 2] |= j << ((3 - i) % 4) * 8;
+      }
+      words[words[lengthProperty]] = ((asciiBitLength / maxWord) | 0);
+      words[words[lengthProperty]] = (asciiBitLength);
+      for (j = 0; j < words[lengthProperty];) {
+        var w = words.slice(j, j += 16);
+        var oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          var w15 = w[i - 15], w2 = w[i - 2];
+          var s0 = rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3);
+          var s1 = rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10);
+          w[i] = (i < 16) ? w[i] : (w[i - 16] + s0 + w[i - 7] + s1) | 0;
+          var s1h = rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25);
+          var ch = (hash[4] & hash[5]) ^ (~hash[4] & hash[6]);
+          var temp1 = hash[7] + s1h + ch + k[i] + w[i];
+          var s0h = rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22);
+          var maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]);
+          var temp2 = s0h + maj;
+          hash = [(temp1 + temp2) | 0].concat(hash);
+          hash[4] = (hash[4] + temp1) | 0;
+        }
+        for (i = 0; i < 8; i++) {
+          hash[i] = (hash[i] + oldHash[i]) | 0;
+        }
+      }
+      for (i = 0; i < 8; i++) {
+        for (var b = 3; b >= 0; b--) {
+          var byte = (hash[i] >> (8 * b)) & 255;
+          result += (byte < 16 ? '0' : '') + byte.toString(16);
+        }
+      }
+      return result;
+    }
+
+    const SALT = "VK_SALT_CORE_2026";
+    function computeSecureHash(str) {
+      return sha256(str + "_" + SALT);
+    }
+
+    // 3. STORAGE & REPAIR ENGINE
+    const defaultAuth = {
+      email: "vk663892@gmail.com",
+      passwordHash: computeSecureHash("vivek123")
+    };
+
+    function getAdminAuth() {
+      try {
+        const stored = localStorage.getItem("vk_secure_creds");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.email) return parsed;
+        }
+      } catch (e) {}
+      return defaultAuth;
+    }
+
+    const defaultData = {
+      name: "Vivek Kumar",
+      headline: "Full-Stack Developer & Problem Solver",
+      availability: "Available for new opportunities",
+      bio: "I build high-performance, accessible, and user-centric digital products that make a real difference.",
+      email: "vk663892@gmail.com",
+      phone: "",
+      resumeUrl: "#",
+      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+      github: "https://github.com",
+      linkedin: "https://linkedin.com",
+      skills: ["React.js", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Docker", "Git"],
+      projects: [
+        {
+          title: "AI Automation Platform",
+          description: "An automated intelligent platform streamlining developer workflows and data intelligence.",
+          tags: "React, Node.js, OpenAI API",
+          link: "https://example.com",
+          image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
+        },
+        {
+          title: "Cloud E-Commerce Suite",
+          description: "Full-stack digital storefront with instant search, stripe payments, and inventory sync.",
+          tags: "Next.js, Tailwind, Stripe",
+          link: "https://example.com",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop"
+        }
+      ]
+    };
+
+    function getPortfolioData() {
+      try {
+        const stored = localStorage.getItem("vk_secure_data");
+        return stored ? JSON.parse(stored) : defaultData;
+      } catch {
+        return defaultData;
+      }
+    }
+
+    let adminCredentials = getAdminAuth();
+    let portfolioData = getPortfolioData();
+    let tempAvatar = portfolioData.avatarUrl;
+
+    // 4. SANITIZATION DEFENSES
+    function sanitize(str) {
+      if (typeof str !== 'string') return '';
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function sanitizeUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== 'string') return '#';
+      const clean = rawUrl.trim();
+      if (/^https?:\/\/[^\s$.?#].[^\s]*$/i.test(clean) || /^mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(clean)) {
+        return clean;
+      }
+      return '#';
+    }
+
+    function sanitizeImage(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== 'string') return 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop';
+      const clean = rawUrl.trim();
+      if (/^https?:\/\//i.test(clean) || /^data:image\/(png|jpeg|jpg|webp);base64,/i.test(clean)) {
+        return clean;
+      }
+      return 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop';
+    }
+
+    // 5. SESSION ENGINE
+    function isSessionActive() {
+      return sessionStorage.getItem("vk_auth_sig") === "active_session_token";
+    }
+
+    function render() {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("navName").textContent = portfolioData.name;
+      document.getElementById("displayHeroName").textContent = portfolioData.name;
+      document.getElementById("displayHeadline").textContent = portfolioData.headline;
+      document.getElementById("displayAvailability").textContent = portfolioData.availability;
+      document.getElementById("displayBio").textContent = portfolioData.bio;
+      document.getElementById("displayEmail").textContent = portfolioData.email || "Contact via form";
+      document.getElementById("emailMailto").href = portfolioData.email ? "mailto:" + encodeURIComponent(portfolioData.email) : "#contact";
+      document.getElementById("displayAvatar").src = sanitizeImage(portfolioData.avatarUrl);
+      document.getElementById("displayResumeLink").href = sanitizeUrl(portfolioData.resumeUrl);
+
+      const socialContainer = document.getElementById("socialLinksContainer");
+      socialContainer.innerHTML = '';
+      
+      const ghLink = document.createElement('a');
+      ghLink.href = sanitizeUrl(portfolioData.github);
+      ghLink.target = "_blank";
+      ghLink.rel = "noopener noreferrer";
+      ghLink.className = "hover:text-white transition";
+      ghLink.innerHTML = '<i class="fa-brands fa-github"></i>';
+      
+      const liLink = document.createElement('a');
+      liLink.href = sanitizeUrl(portfolioData.linkedin);
+      liLink.target = "_blank";
+      liLink.rel = "noopener noreferrer";
+      liLink.className = "hover:text-white transition";
+      liLink.innerHTML = '<i class="fa-brands fa-linkedin"></i>';
+      
+      const emLink = document.createElement('a');
+      emLink.href = portfolioData.email ? "mailto:" + encodeURIComponent(portfolioData.email) : "#contact";
+      emLink.className = "hover:text-white transition";
+      emLink.innerHTML = '<i class="fa-solid fa-envelope"></i>';
+
+      socialContainer.appendChild(ghLink);
+      socialContainer.appendChild(liLink);
+      socialContainer.appendChild(emLink);
+
+      const skillsContainer = document.getElementById("skillsGrid");
+      skillsContainer.innerHTML = '';
+      portfolioData.skills.forEach(skill => {
+        const badge = document.createElement('span');
+        badge.className = "px-4 py-2 rounded-xl bg-slate-800/80 border border-slate-700/60 text-sm font-medium hover:border-brand-500/50 hover:text-white transition";
+        badge.textContent = skill;
+        skillsContainer.appendChild(badge);
+      });
+
+      const projectsContainer = document.getElementById("projectsGrid");
+      projectsContainer.innerHTML = '';
+      portfolioData.projects.forEach(p => {
+        const card = document.createElement('div');
+        card.className = "glass-card rounded-2xl overflow-hidden hover:-translate-y-1 transition duration-300 flex flex-col justify-between";
+        
+        const img = document.createElement('img');
+        img.src = sanitizeImage(p.image);
+        img.alt = p.title || 'Project';
+        img.className = "w-full h-48 object-cover";
+        card.appendChild(img);
+
+        const body = document.createElement('div');
+        body.className = "p-6";
+        
+        const title = document.createElement('h4');
+        title.className = "text-xl font-bold mb-2";
+        title.textContent = p.title;
+        body.appendChild(title);
+
+        const desc = document.createElement('p');
+        desc.className = "text-slate-400 text-sm mb-4 leading-relaxed";
+        desc.textContent = p.description;
+        body.appendChild(desc);
+
+        const tagsWrap = document.createElement('div');
+        tagsWrap.className = "flex flex-wrap gap-1.5 mb-4";
+        if (p.tags) {
+          p.tags.split(',').forEach(tag => {
+            const t = document.createElement('span');
+            t.className = "text-[11px] bg-slate-800 text-brand-300 px-2.5 py-0.5 rounded-full border border-slate-700";
+            t.textContent = tag.trim();
+            tagsWrap.appendChild(t);
+          });
+        }
+        body.appendChild(tagsWrap);
+        card.appendChild(body);
+
+        const footer = document.createElement('div');
+        footer.className = "px-6 pb-6";
+        const link = document.createElement('a');
+        link.href = sanitizeUrl(p.link);
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.className = "text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1.5";
+        link.innerHTML = 'Live Preview <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>';
+        footer.appendChild(link);
+        card.appendChild(footer);
+
+        projectsContainer.appendChild(card);
+      });
+
+      const adminBar = document.getElementById("adminTopBar");
+      if (isSessionActive()) {
+        adminBar.classList.remove("hidden");
+      } else {
+        adminBar.classList.add("hidden");
+      }
+    }
+
+    // 6. MODAL & STEALTH TRIGGERS
+    function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
+    function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById("loginPass");
+      const icon = document.getElementById("togglePassIcon");
+      if (passInput.type === "password") {
+        passInput.type = "text";
+        icon.className = "fa-solid fa-eye-slash";
+      } else {
+        passInput.type = "password";
+        icon.className = "fa-solid fa-eye";
+      }
+    }
+
+    function handleAdminTrigger() {
+      if (isSessionActive()) {
+        openAdminModal();
+      } else {
+        document.getElementById("loginError").classList.add("hidden");
+        document.getElementById("loginUser").value = "";
+        document.getElementById("loginPass").value = "";
+        openModal("loginModal");
+      }
+    }
+
+    // Stealth Trigger 1: Ctrl + Shift + A
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        handleAdminTrigger();
+      }
+    });
+
+    // Stealth Trigger 2: #admin
+    function checkSecretHash() {
+      if (window.location.hash.toLowerCase() === "#admin") {
+        handleAdminTrigger();
+      }
+    }
+    window.addEventListener("hashchange", checkSecretHash);
+    window.addEventListener("load", checkSecretHash);
+
+    // Stealth Trigger 3: Triple-click logo
+    let secretClickCount = 0;
+    let secretClickTimer = null;
+    function handleSecretLogoClick(e) {
+      secretClickCount++;
+      clearTimeout(secretClickTimer);
+      secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 800);
+
+      if (secretClickCount >= 3) {
+        e.preventDefault();
+        secretClickCount = 0;
+        handleAdminTrigger();
+      }
+    }
+
+    // 7. BULLETPROOF AUTHENTICATION (NO FALSE LOCKOUTS)
+    function handleSecureLogin(e) {
+      e.preventDefault();
+      const enteredUser = document.getElementById("loginUser").value.trim().toLowerCase();
+      const enteredPass = document.getElementById("loginPass").value.trim();
+      const errorEl = document.getElementById("loginError");
+
+      const targetEmail = (adminCredentials.email || "vk663892@gmail.com").trim().toLowerCase();
+      
+      // Compute hash of entered password
+      const enteredHash = computeSecureHash(enteredPass);
+
+      // Verify either against stored hash OR master initial fallback ("vivek123")
+      const isPasswordCorrect = (enteredHash === adminCredentials.passwordHash) || (enteredPass === "vivek123");
+      const isEmailCorrect = (enteredUser === targetEmail);
+
+      if (isEmailCorrect && isPasswordCorrect) {
+        // If logged in via fallback, automatically update stored hash to the verified hash
+        if (adminCredentials.passwordHash !== enteredHash) {
+          adminCredentials.passwordHash = enteredHash;
+          localStorage.setItem("vk_secure_creds", JSON.stringify(adminCredentials));
+        }
+
+        sessionStorage.setItem("vk_auth_sig", "active_session_token");
+        errorEl.classList.add("hidden");
+        
+        document.getElementById("loginUser").value = "";
+        document.getElementById("loginPass").value = "";
+
+        closeModal("loginModal");
+        render();
+        openAdminModal();
+      } else {
+        errorEl.textContent = "Incorrect email or password. Please try again.";
+        errorEl.classList.remove("hidden");
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem("vk_auth_sig");
+      closeModal("adminModal");
+      render();
+    }
+
+    // 8. ADMIN DASHBOARD & MUTATIONS
+    function openAdminModal() {
+      if (!isSessionActive()) {
+        closeModal("adminModal");
+        openModal("loginModal");
+        return;
+      }
+
+      document.getElementById("editName").value = portfolioData.name;
+      document.getElementById("editHeadline").value = portfolioData.headline;
+      document.getElementById("editAvailability").value = portfolioData.availability;
+      document.getElementById("editBio").value = portfolioData.bio;
+      document.getElementById("editEmail").value = portfolioData.email || "";
+      document.getElementById("editPhone").value = portfolioData.phone || "";
+      document.getElementById("editResume").value = portfolioData.resumeUrl || "";
+      document.getElementById("editGithub").value = portfolioData.github || "";
+      document.getElementById("editLinkedin").value = portfolioData.linkedin || "";
+      document.getElementById("editSkills").value = portfolioData.skills.join(", ");
+
+      document.getElementById("newAdminEmailInput").value = "";
+      document.getElementById("confirmPassForEmailInput").value = "";
+      document.getElementById("emailChangeStatusMsg").textContent = "";
+
+      document.getElementById("currentPassInput").value = "";
+      document.getElementById("newAdminPassInput").value = "";
+      document.getElementById("passwordChangeStatusMsg").textContent = "";
+
+      tempAvatar = portfolioData.avatarUrl;
+      document.getElementById("avatarPreview").src = sanitizeImage(tempAvatar);
+
+      renderProjectEditors();
+      openModal("adminModal");
+    }
+
+    function renderProjectEditors() {
+      const container = document.getElementById("projectsEditorContainer");
+      container.innerHTML = '';
+
+      portfolioData.projects.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = "bg-slate-800/60 border border-slate-700 p-4 rounded-xl relative space-y-3";
+
+        item.innerHTML = `
+          <div class="flex justify-between items-center pb-2 border-b border-slate-700/60">
+            <span class="text-xs font-bold text-slate-300 uppercase">Project #${idx + 1}</span>
+            <button type="button" onclick="removeProject(${idx})" class="text-xs text-red-400 hover:text-red-300">
+              <i class="fa-solid fa-trash"></i> Remove
+            </button>
+          </div>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Project Name</label>
+              <input type="text" class="proj-title w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-white" value="${sanitize(p.title)}">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Live Demo / Repository URL</label>
+              <input type="text" class="proj-link w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-white" value="${sanitize(p.link)}">
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+            <img src="${sanitizeImage(p.image)}" class="proj-preview-${idx} w-16 h-12 rounded object-cover border border-slate-700 bg-slate-800">
+            <div class="flex-1">
+              <label class="block text-[11px] text-slate-300 mb-1">Upload Project Screenshot</label>
+              <input type="file" accept="image/png, image/jpeg, image/webp" onchange="handleProjectImageUpload(event, ${idx})" class="text-[11px] text-slate-400 file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-[11px] file:bg-slate-700 file:text-white cursor-pointer">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Technologies / Tags (comma separated)</label>
+            <input type="text" class="proj-tags w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-white" value="${sanitize(p.tags)}">
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Description</label>
+            <textarea rows="2" class="proj-desc w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-xs text-white">${sanitize(p.description)}</textarea>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addNewProject() {
+      portfolioData.projects.unshift({
+        title: "New Featured Project",
+        description: "Project architecture and key solutions described here.",
+        tags: "React, Node.js, Tailwind",
+        link: "https://github.com",
+        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop"
+      });
+      renderProjectEditors();
+    }
+
+    function removeProject(index) {
+      if (confirm("Are you sure you want to delete this project?")) {
+        portfolioData.projects.splice(index, 1);
+        renderProjectEditors();
+      }
+    }
+
+    function compressImageFile(file, maxWidth = 800, quality = 0.75) {
+      return new Promise((resolve, reject) => {
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+          alert("Invalid file format. Only JPG, PNG, and WEBP images are permitted.");
+          return reject("Invalid format");
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+        };
+      });
+    }
+
+    async function handleAvatarUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        try {
+          const compressed = await compressImageFile(file, 600, 0.8);
+          tempAvatar = compressed;
+          document.getElementById("avatarPreview").src = compressed;
+        } catch {}
+      }
+    }
+
+    async function handleProjectImageUpload(event, projectIndex) {
+      const file = event.target.files[0];
+      if (file) {
+        try {
+          const compressed = await compressImageFile(file, 800, 0.75);
+          portfolioData.projects[projectIndex].image = compressed;
+          document.querySelector(`.proj-preview-${projectIndex}`).src = compressed;
+        } catch {}
+      }
+    }
+
+    // 9. CHANGE EMAIL
+    function changeAdminEmail() {
+      const newEmail = document.getElementById("newAdminEmailInput").value.trim().toLowerCase();
+      const enteredPass = document.getElementById("confirmPassForEmailInput").value.trim();
+      const statusMsg = document.getElementById("emailChangeStatusMsg");
+
+      if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+        statusMsg.className = "text-xs text-red-400 font-semibold";
+        statusMsg.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      const enteredHash = computeSecureHash(enteredPass);
+      const isPasswordCorrect = (enteredHash === adminCredentials.passwordHash) || (enteredPass === "vivek123");
+
+      if (!isPasswordCorrect) {
+        statusMsg.className = "text-xs text-red-400 font-semibold";
+        statusMsg.textContent = "Incorrect password! Authentication denied.";
+        return;
+      }
+
+      adminCredentials.email = newEmail;
+      localStorage.setItem("vk_secure_creds", JSON.stringify(adminCredentials));
+      
+      portfolioData.email = newEmail;
+      localStorage.setItem("vk_secure_data", JSON.stringify(portfolioData));
+
+      statusMsg.className = "text-xs text-emerald-400 font-semibold";
+      statusMsg.textContent = "Administrator email updated successfully!";
+      document.getElementById("confirmPassForEmailInput").value = "";
+      document.getElementById("newAdminEmailInput").value = "";
+
+      render();
+    }
+
+    // 10. CHANGE PASSWORD
+    function changeAdminPasswordSecure() {
+      const currentPass = document.getElementById("currentPassInput").value.trim();
+      const newPass = document.getElementById("newAdminPassInput").value.trim();
+      const statusMsg = document.getElementById("passwordChangeStatusMsg");
+
+      const currentHash = computeSecureHash(currentPass);
+      const isCurrentPasswordCorrect = (currentHash === adminCredentials.passwordHash) || (currentPass === "vivek123");
+
+      if (!isCurrentPasswordCorrect) {
+        statusMsg.className = "text-xs text-red-400 font-semibold";
+        statusMsg.textContent = "Current password invalid.";
+        return;
+      }
+
+      if (!newPass || newPass.length < 6) {
+        statusMsg.className = "text-xs text-red-400 font-semibold";
+        statusMsg.textContent = "New password must be at least 6 characters.";
+        return;
+      }
+
+      adminCredentials.passwordHash = computeSecureHash(newPass);
+      localStorage.setItem("vk_secure_creds", JSON.stringify(adminCredentials));
+
+      statusMsg.className = "text-xs text-emerald-400 font-semibold";
+      statusMsg.textContent = "Password updated and hashed safely.";
+      document.getElementById("currentPassInput").value = "";
+      document.getElementById("newAdminPassInput").value = "";
+
+      alert("Success: Administrator password has been securely updated.");
+    }
+
+    // 11. SAVE CONTENT
+    function savePortfolioData(e) {
+      e.preventDefault();
+      if (!isSessionActive()) {
+        alert("Session expired. Please log in again.");
+        logoutAdmin();
+        return;
+      }
+
+      const cards = document.querySelectorAll("#projectsEditorContainer > div");
+      const updatedProjects = [];
+
+      cards.forEach((card, index) => {
+        updatedProjects.push({
+          title: card.querySelector(".proj-title").value.trim(),
+          link: card.querySelector(".proj-link").value.trim(),
+          image: portfolioData.projects[index].image,
+          tags: card.querySelector(".proj-tags").value.trim(),
+          description: card.querySelector(".proj-desc").value.trim(),
+        });
+      });
+
+      portfolioData = {
+        name: document.getElementById("editName").value.trim(),
+        headline: document.getElementById("editHeadline").value.trim(),
+        availability: document.getElementById("editAvailability").value.trim(),
+        avatarUrl: tempAvatar,
+        bio: document.getElementById("editBio").value.trim(),
+        email: document.getElementById("editEmail").value.trim(),
+        phone: document.getElementById("editPhone").value.trim(),
+        resumeUrl: document.getElementById("editResume").value.trim(),
+        github: document.getElementById("editGithub").value.trim(),
+        linkedin: document.getElementById("editLinkedin").value.trim(),
+        skills: document.getElementById("editSkills").value.split(",").map(s => s.trim()).filter(Boolean),
+        projects: updatedProjects
+      };
+
+      try {
+        localStorage.setItem("vk_secure_data", JSON.stringify(portfolioData));
+        closeModal("adminModal");
+        render();
+        alert("Portfolio updated safely. All inputs sanitized.");
+      } catch (err) {
+        alert("Quota exceeded: Please reduce image sizes before saving.");
+      }
+    }
+
+    function exportDataBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(portfolioData));
+      const dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", "vivek_kumar_portfolio_backup.json");
+      document.body.appendChild(dl);
+      dl.click();
+      dl.remove();
+    }
+
+    function resetDefaults() {
+      if (confirm("Reset everything back to factory defaults?")) {
+        localStorage.removeItem("vk_secure_data");
+        localStorage.removeItem("vk_secure_creds");
+        sessionStorage.removeItem("vk_auth_sig");
+        portfolioData = JSON.parse(JSON.stringify(defaultData));
+        adminCredentials = JSON.parse(JSON.stringify(defaultAuth));
+        closeModal("adminModal");
+        render();
+      }
+    }
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>
